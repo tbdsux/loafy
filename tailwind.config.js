@@ -3,7 +3,6 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   mode: 'jit',
-  // NOTE: configure this if you have another folder with tsx files or (that uses stylinggs)
   content: [
     './src/pages/**/*.tsx',
     './src/components/**/*.tsx',
@@ -11,15 +10,17 @@ module.exports = {
     './src/layouts/**/*.tsx'
   ],
   theme: {
-    // add all default colors
-    colors,
+    colors: {
+      first: '#621e2b',
+      second: '#802835',
+      third: '#ae3c43',
+      fourth: '#f05b57',
+      fifth: '#ff907c',
+      ...colors
+    },
 
-    // NOTE: Add the lines below if you want to add a google font
     fontFamily: {
-      sans: [
-        // '"name of google font"', // your google name font
-        ...defaultTheme.fontFamily.sans
-      ]
+      sans: ['"Work Sans"', ...defaultTheme.fontFamily.sans]
     },
     extend: {}
   },

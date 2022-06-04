@@ -5,7 +5,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const api = async (req: NextApiRequest, res: NextApiResponse) => {
-  res.end('hello');
+  res.end(process.env.SECRET_TOKEN);
 };
 
 export default api;

@@ -1,0 +1,30 @@
+datasource db {
+    url = env("DATABASE_URL")
+    provider = "mysql"
+    referentialIntegrity = "prisma"
+}
+
+generator client {
+    provider = "prisma-client-js"
+    previewFeatures = ["referentialIntegrity"]
+}
+
+
+model User {
+    id Int @id @default(autoincrement())
+    username String
+    email String @unique
+    password String
+    posts Posts[]
+}
+
+
+model Posts {
+    id Int @id @default(autoincrement())
+    slug String @unique
+    createdAt DateTime @default(now())
+    title String
+    published Boolean
+    author User @relation(fields: [authorId], references: [id])
+    authorId Int
+}

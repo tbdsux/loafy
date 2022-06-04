@@ -4,9 +4,11 @@ import DefaultLayout from '../../layouts/Default';
 const HomePage = () => {
   return (
     <DefaultLayout>
-      <Seo title="Home" />
+      <Seo title="Welcome" />
 
-      <div>start coding!</div>
+      <div className="w-11/12 mx-auto my-12">
+        <p>posts should be in here</p>
+      </div>
     </DefaultLayout>
   );
 };

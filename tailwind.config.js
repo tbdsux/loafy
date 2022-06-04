@@ -11,11 +11,11 @@ module.exports = {
   ],
   theme: {
     colors: {
-      first: '#621e2b',
-      second: '#802835',
-      third: '#ae3c43',
-      fourth: '#f05b57',
-      fifth: '#ff907c',
+      iris: '#454ADE',
+      spaceCadet: '#1B1F3B',
+      mediumOrchid: '#B14AED',
+      frenchMauve: '#C874D9',
+      cameoPink: '#E1BBC9',
       ...colors
     },
 

@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import Seo from '../../components/Seo';
 import DefaultLayout from '../../layouts/Default';
 import { useUser } from '../../lib/hooks/useUser';
 
@@ -8,23 +9,19 @@ const DashboardPage = () => {
 
   return (
     <DefaultLayout>
-      <p>
-        {user?.username} / {user?.email}
-      </p>
+      <Seo title={`Dashboard - ${user?.username}`} />
 
-      <button
-        onClick={() => {
-          mutateUser(async () => {
-            const r = await fetch('/api/logout');
+      <div className="w-11/12 mx-auto my-12">
+        <div className="flex items-center justify-between">
+          <button className="bg-spaceCadet opacity-80 hover:opacity-100 duration-300 text-white text-sm py-2 px-8 rounded-lg">
+            create new post
+          </button>
 
-            return r.json();
-          }, false);
-
-          router.push('/auth');
-        }}
-      >
-        logout
-      </button>
+          <p className="text-sm text-right text-gray-700">
+            {user?.username} ({user?.email})
+          </p>
+        </div>
+      </div>
     </DefaultLayout>
   );
 };

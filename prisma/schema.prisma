@@ -24,7 +24,7 @@ model Posts {
     slug String @unique
     createdAt DateTime @default(now())
     title String
-    content String
+    content String @db.Text
     published Boolean
     author User @relation(fields: [authorId], references: [id])
     authorId Int

@@ -1,4 +1,6 @@
+import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
+import { toast } from 'react-toastify';
 import Vditor from 'vditor';
 import 'vditor/dist/index.css';
 import Seo from '../../../components/Seo';
@@ -8,8 +10,8 @@ import { PostProps } from '../../../lib/posts';
 import { ApiResponse } from '../../../typings/api';
 
 const CreateNewPostPage = () => {
+  const router = useRouter();
   const [vd, setVd] = useState<Vditor>();
-
   const titleInput = useRef<HTMLInputElement>(null);
 
   const createPost = async () => {
@@ -29,7 +31,17 @@ const CreateNewPostPage = () => {
 
     const data: ApiResponse = await r.json();
 
-   console.log(data)
+    if (!r.ok) {
+      toast.error('There was a problem trying to create the post.');
+      return;
+    }
+
+    toast.success('Successfully created a new post.');
+
+    // redirect after 2secs
+    setTimeout(() => {
+      router.push('/dashboard');
+    }, 2000);
   };
 
   useEffect(() => {

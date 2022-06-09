@@ -1,8 +1,9 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useUser } from '../lib/hooks/useUser';
 
 const Header = () => {
-  const { user, mutateUser } = useUser({ redirectToIfNone: '/auth' });
+  const { user, mutateUser } = useUser({});
   const router = useRouter();
 
   const logout = () => {
@@ -31,12 +32,11 @@ const Header = () => {
         {user != null ? (
           <ul className="inline-flex items-center text-sm">
             <li className="mx-12">
-              <a
-                href="/dashboard"
-                className="bg-iris opacity-80 hover:opacity-100 duration-300 text-white py-2 px-6 rounded-lg"
-              >
-                dashboard
-              </a>
+              <Link href="/dashboard">
+                <a className="bg-iris opacity-80 hover:opacity-100 duration-300 text-white py-2 px-6 rounded-lg">
+                  dashboard
+                </a>
+              </Link>
             </li>
             <li>
               <button onClick={logout}>logout</button>

@@ -6,7 +6,7 @@ import { useUser } from '../../lib/hooks/useUser';
 import { ApiResponse } from '../../typings/api';
 
 const LoginPage = () => {
-  useUser({ redirectTo: '/dashboard' });
+  useUser({ redirectTo: '/dashboard', redirectIfFound: true });
 
   const router = useRouter();
 

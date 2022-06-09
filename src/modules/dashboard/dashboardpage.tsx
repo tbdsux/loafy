@@ -1,20 +1,22 @@
-import { useRouter } from 'next/router';
 import { LinkButton } from '../../components/LinkButton';
 import Seo from '../../components/Seo';
 import DefaultLayout from '../../layouts/Default';
 import { useUser } from '../../lib/hooks/useUser';
+import ShowUserPosts from './show-user-posts';
 
 const DashboardPage = () => {
-  const { user, mutateUser } = useUser({ redirectToIfNone: '/auth' });
-  const router = useRouter();
+  const { user } = useUser({ redirectTo: '/auth' });
 
   return (
     <DefaultLayout>
       <Seo title={`Dashboard - ${user?.username}`} />
 
       <div className="w-11/12 mx-auto my-12">
-        <div className="flex items-center justify-between">
-          <LinkButton href="/dashboard/new-post" className="bg-spaceCadet opacity-80 hover:opacity-100 duration-300 text-white text-sm py-2 px-8 rounded-lg">
+        <div className="flex items-center justify-between mb-4">
+          <LinkButton
+            href="/dashboard/new-post"
+            className="bg-spaceCadet opacity-80 hover:opacity-100 duration-300 text-white text-sm py-2 px-8 rounded-lg"
+          >
             create new post
           </LinkButton>
 
@@ -22,6 +24,8 @@ const DashboardPage = () => {
             {user?.username} ({user?.email})
           </p>
         </div>
+
+        <ShowUserPosts />
       </div>
     </DefaultLayout>
   );

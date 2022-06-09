@@ -1,9 +1,10 @@
+import { NextApiRequest, NextApiResponse } from 'next';
 import { validatePassword } from '../../lib/auth';
-import { handler } from '../../lib/next-connect';
+import methodHandler from '../../lib/middleware/methods';
 import { createSession } from '../../lib/session';
 import { findUser } from '../../lib/user';
 
-export default handler.post(async (req, res) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { email, password } = req.body;
 
   try {
@@ -30,4 +31,6 @@ export default handler.post(async (req, res) => {
       .status(500)
       .json({ success: false, message: 'There was a problem trying to login your credentials.' });
   }
-});
+};
+
+export default methodHandler(handler, ['POST']);

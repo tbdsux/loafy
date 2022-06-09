@@ -1,9 +1,11 @@
-import { handler } from '../../lib/next-connect';
+import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from '../../lib/session';
 import { UserProps } from '../../lib/user';
 
-export default handler.get(async (req, res) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await getSession<UserProps>(req);
 
   res.status(200).json({ success: true, data: user });
-});
+};
+
+export default handler;

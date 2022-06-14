@@ -20,7 +20,7 @@ module.exports = {
     },
 
     fontFamily: {
-      sans: ['"Work Sans"', ...defaultTheme.fontFamily.sans]
+      sans: ['"Karla"', ...defaultTheme.fontFamily.sans]
     },
     extend: {}
   },

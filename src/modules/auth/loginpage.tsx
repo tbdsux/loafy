@@ -59,8 +59,8 @@ const LoginPage = () => {
 
       <div className="w-5/6 mx-auto py-32">
         <form onSubmit={login} className="text-center w-2/5 mx-auto shadow-xl rounded-lg p-8">
-          <h3 className="text-2xl font-black text-third">login account</h3>
-          <p>authenticate your user account to continue...</p>
+          <h3 className="text-2xl font-black text-spaceCadet">login account</h3>
+          <p className="text-gray-700">authenticate your user account to continue...</p>
 
           <hr className="my-6" />
 
@@ -94,7 +94,7 @@ const LoginPage = () => {
           <div className="mt-8">
             <button
               type="submit"
-              className="py-2 px-12 rounded-lg bg-third hover:bg-second text-white duration-300"
+              className="py-2 px-12 rounded-lg bg-iris opacity-80 hover:opacity-100 duration-300 hover:bg-second text-white duration-300"
             >
               login
             </button>

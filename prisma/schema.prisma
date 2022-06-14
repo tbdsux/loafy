@@ -25,6 +25,7 @@ model Posts {
     createdAt DateTime @default(now())
     title String
     content String @db.Text
+    synopsis String @db.Text
     published Boolean
     author User @relation(fields: [authorId], references: [id])
     authorId Int

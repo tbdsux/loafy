@@ -1,9 +1,10 @@
-import { handler } from '../../../lib/next-connect';
+import { NextApiRequest, NextApiResponse } from 'next';
+import methodHandler from '../../../lib/middleware/methods';
 import { createPost, PostProps } from '../../../lib/posts';
 import { getSession } from '../../../lib/session';
 import { UserProps } from '../../../lib/user';
 
-export default handler.post(async (req, res) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession<UserProps>(req);
 
   const post: PostProps = req.body;
@@ -24,4 +25,6 @@ export default handler.post(async (req, res) => {
       .status(500)
       .json({ success: false, message: 'There was a problem while trying to create a new post.' });
   }
-});
+};
+
+export default methodHandler(handler, ['POST']);

@@ -2,11 +2,9 @@ import { prisma } from './prisma';
 import { UserProps } from './user';
 
 interface PostProps {
-  id: number;
-  authorId: number;
-  createdAt: Date;
   content: string;
   slug: string;
+  synopsis: string;
   title: string;
   published: boolean;
 }
@@ -27,6 +25,7 @@ const createPost = async (post: PostProps, user: UserProps) => {
 };
 
 const fetchPosts = async (user: UserProps) => {
+  // TODO: sort thet posts in here
   const posts = await prisma.user.findUnique({
     where: {
       id: user.id
@@ -40,7 +39,11 @@ const fetchPosts = async (user: UserProps) => {
 };
 
 const fetchAllPosts = async () => {
-  return await prisma.posts.findMany();
+  return await prisma.posts.findMany({
+    orderBy: {
+      createdAt: 'desc'
+    }
+  });
 };
 export { createPost, fetchPosts, fetchAllPosts };
 export type { PostProps };

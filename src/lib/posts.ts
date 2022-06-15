@@ -38,6 +38,24 @@ const fetchPosts = async (user: UserProps) => {
   return posts?.posts ?? [];
 };
 
+const fetchPostBySlug = async (slug: string) => {
+  const post = await prisma.posts.findUnique({
+    where: {
+      slug
+    },
+    include: {
+      author: {
+        select: {
+          username: true,
+          email: true
+        }
+      }
+    }
+  });
+
+  return post
+};
+
 const fetchAllPosts = async () => {
   return await prisma.posts.findMany({
     orderBy: {
@@ -45,5 +63,6 @@ const fetchAllPosts = async () => {
     }
   });
 };
-export { createPost, fetchPosts, fetchAllPosts };
+export { createPost, fetchPosts, fetchAllPosts, fetchPostBySlug };
 export type { PostProps };
+

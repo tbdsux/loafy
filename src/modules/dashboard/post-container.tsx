@@ -30,7 +30,7 @@ const PostContainer = ({ post, user }: PostContainerProps) => {
       </p>
       <div className="mt-2 flex items-center justify-between">
         <LinkButton
-          href={`/posts/${post.slug}`}
+          href={`/p/${post.slug}`}
           className="bg-iris opacity-80 hover:opacity-100 duration-300 text-white py-2 px-8 rounded-lg text-sm"
         >
           read

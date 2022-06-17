@@ -25,17 +25,16 @@ const createPost = async (post: PostProps, user: UserProps) => {
 };
 
 const fetchPosts = async (user: UserProps) => {
-  // TODO: sort thet posts in here
-  const posts = await prisma.user.findUnique({
+  const posts = await prisma.posts.findMany({
     where: {
-      id: user.id
+      authorId: user.id
     },
-    select: {
-      posts: true
+    orderBy: {
+      createdAt: 'desc'
     }
   });
 
-  return posts?.posts ?? [];
+  return posts;
 };
 
 const fetchPostBySlug = async (slug: string) => {
@@ -53,7 +52,25 @@ const fetchPostBySlug = async (slug: string) => {
     }
   });
 
-  return post
+  return post;
+};
+
+const fetchPostById = async (id: number) => {
+  const post = await prisma.posts.findUnique({
+    where: {
+      id
+    },
+    include: {
+      author: {
+        select: {
+          username: true,
+          email: true
+        }
+      }
+    }
+  });
+
+  return post;
 };
 
 const fetchAllPosts = async () => {
@@ -63,6 +80,17 @@ const fetchAllPosts = async () => {
     }
   });
 };
-export { createPost, fetchPosts, fetchAllPosts, fetchPostBySlug };
-export type { PostProps };
 
+const updatePostById = async (id: number, post: PostProps) => {
+  return await prisma.posts.update({
+    where: {
+      id
+    },
+    data: {
+      ...post
+    }
+  });
+};
+
+export { createPost, fetchPosts, fetchAllPosts, fetchPostBySlug, fetchPostById, updatePostById };
+export type { PostProps };

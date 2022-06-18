@@ -1,33 +1,26 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useUser } from '../lib/hooks/useUser';
+import { LinkButton } from './LinkButton';
 
 const Header = () => {
-  const { user, mutateUser } = useUser({});
+  const { user } = useUser({});
   const router = useRouter();
 
-  const logout = () => {
-    mutateUser(async () => {
-      const r = await fetch('/api/logout');
+  const logout = async () => {
+    const r = await fetch('/api/logout');
 
-      return r.json();
-    }, false);
-
-    router.push('/auth');
+    if (r.ok) {
+      router.push('/auth');
+    }
   };
 
   return (
     <nav className="border-b border-iris py-4">
       <div className="w-11/12 mx-auto flex items-center justify-between">
-        <h1 className="text-xl font-bold text-iris">loafy</h1>
-
-        <ul>
-          <li>
-            <a href="#" className="text-sm hover:text-iris">
-              all posts
-            </a>
-          </li>
-        </ul>
+        <h1 className="text-xl font-black text-iris">
+          <LinkButton href="/">loafy</LinkButton>
+        </h1>
 
         {user != null ? (
           <ul className="inline-flex items-center text-sm">
@@ -39,7 +32,9 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <button onClick={logout}>logout</button>
+              <button onClick={logout} className="hover:underline text-gray-800">
+                logout
+              </button>
             </li>
           </ul>
         ) : (

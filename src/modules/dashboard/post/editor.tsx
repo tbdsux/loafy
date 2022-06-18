@@ -21,7 +21,7 @@ interface PostEditorProps {
 const PostEditor = ({ handler, post }: PostEditorProps) => {
   const [vd, setVd] = useState<Vditor>();
 
-  const [slug, setSlug] = useState('');
+  const [slug, setSlug] = useState(post?.slug ?? '');
 
   const titleInput = useRef<HTMLInputElement>(null);
   const slugInput = useRef<HTMLInputElement>(null);

@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { FormEvent, useRef } from 'react';
+import { toast } from 'react-toastify';
 import Seo from '../../components/Seo';
 import DefaultLayout from '../../layouts/Default';
 import { useUser } from '../../lib/hooks/useUser';
@@ -12,6 +13,7 @@ const LoginPage = () => {
 
   const emailInput = useRef<HTMLInputElement>(null);
   const passwordInput = useRef<HTMLInputElement>(null);
+  const loginBtn = useRef<HTMLButtonElement>(null);
 
   const login = async (e: FormEvent) => {
     e.preventDefault();
@@ -26,6 +28,10 @@ const LoginPage = () => {
 
     const body = { email, password };
 
+    if (!loginBtn.current) return;
+    loginBtn.current.innerText = 'logging in...';
+    loginBtn.current.disabled = true;
+
     try {
       const res = await fetch('/api/login', {
         method: 'POST',
@@ -35,22 +41,32 @@ const LoginPage = () => {
         body: JSON.stringify(body)
       });
 
-      if (!res.ok) {
-        // internal problem in here
-      }
-
       const data = (await res.json()) as ApiResponse;
 
       if (!data.success) {
         // failed to login in here
+        toast.error('Error: ' + data.message);
+
+        return;
       }
 
-      router.push('/dashboard');
+      toast.success('Succesfully logged in.');
+
+      setTimeout(() => {
+        router.push('/dashboard');
+      }, 2000);
     } catch (err) {
+      loginBtn.current.innerText = 'login';
+      loginBtn.current.disabled = false;
+
       console.log(err);
+
+      toast.error(String(err));
 
       // handle error in here
     }
+
+    
   };
 
   return (
@@ -69,7 +85,7 @@ const LoginPage = () => {
               email
             </label>
             <input
-              className="py-2 px-4 rounded-lg border"
+              className="py-2 px-4 rounded-lg border-2 outline-none focus:border-iris"
               placeholder="your email address"
               type="text"
               name="email"
@@ -82,7 +98,7 @@ const LoginPage = () => {
               password
             </label>
             <input
-              className="py-2 px-4 rounded-lg border"
+              className="py-2 px-4 rounded-lg border-2 outline-none focus:border-iris"
               placeholder="your password"
               type="password"
               name="password"
@@ -93,8 +109,9 @@ const LoginPage = () => {
 
           <div className="mt-8">
             <button
+              ref={loginBtn}
               type="submit"
-              className="py-2 px-12 rounded-lg bg-iris opacity-80 hover:opacity-100 duration-300 hover:bg-second text-white duration-300"
+              className="py-2 px-12 rounded-lg bg-iris opacity-80 hover:opacity-100 hover:bg-second text-white duration-300"
             >
               login
             </button>

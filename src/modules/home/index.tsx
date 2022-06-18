@@ -7,7 +7,7 @@ const HomePage = () => {
     <DefaultLayout>
       <Seo title="Welcome" />
 
-      <div className="w-5/6 mx-auto my-12">
+      <div className="w-3/4 mx-auto my-12">
         <ShowAllPosts />
       </div>
     </DefaultLayout>

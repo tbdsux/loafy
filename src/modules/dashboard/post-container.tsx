@@ -9,7 +9,7 @@ interface PostContainerProps {
 
 const PostContainer = ({ post, user }: PostContainerProps) => {
   return (
-    <li className="my-2 relative border rounded-lg p-6">
+    <li className="my-4 bg-neutral-200 relative rounded-lg p-8">
       {user != null && user.id == post.authorId ? (
         <div className="absolute top-2 right-2">
           <LinkButton
@@ -26,7 +26,7 @@ const PostContainer = ({ post, user }: PostContainerProps) => {
       <h4 className="text-3xl font-extrabold leading-loose text-spaceCadet opacity-90">
         {post.title}
       </h4>
-      <p className="line-clamp-2">{post.synopsis}</p>
+      <p className="line-clamp-2 text-gray-700">{post.synopsis}</p>
       <div className="mt-2 flex items-center justify-between">
         <LinkButton
           href={`/p/${post.slug}`}
@@ -35,7 +35,7 @@ const PostContainer = ({ post, user }: PostContainerProps) => {
           read
         </LinkButton>
 
-        <small className="">{new Date(post.createdAt).toString()}</small>
+        <small className="text-gray-500">{new Date(post.createdAt).toString()}</small>
       </div>
     </li>
   );

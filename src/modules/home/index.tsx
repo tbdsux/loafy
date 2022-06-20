@@ -7,15 +7,16 @@ import ShowAllPosts from './all-posts';
 
 interface HomePageProps {
   data: ApiResponse<Posts[]>;
+  page: number;
 }
 
-const HomePage: NextPage<HomePageProps> = ({ data }) => {
+const HomePage: NextPage<HomePageProps> = ({ data, page }) => {
   return (
     <DefaultLayout>
       <Seo title="Welcome" />
 
       <div className="w-3/4 mx-auto my-12">
-        <ShowAllPosts defaultPosts={data} />
+        <ShowAllPosts defaultPosts={data} page={page} />
       </div>
     </DefaultLayout>
   );

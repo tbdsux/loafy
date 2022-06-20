@@ -1,5 +1,6 @@
 import { prisma } from './prisma';
 import { UserProps } from './user';
+import { postsPerPage } from './utils';
 
 interface PostProps {
   content: string;
@@ -72,9 +73,15 @@ const fetchPostById = async (id: number) => {
 
   return post;
 };
+const fetchAllPosts = async (page: number) => {
+  if (page <= 0) page = 1;
 
-const fetchAllPosts = async () => {
+  let skip = (page - 1) * postsPerPage;
+
   return await prisma.posts.findMany({
+    skip,
+    take: postsPerPage,
+
     orderBy: {
       createdAt: 'desc'
     }

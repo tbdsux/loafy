@@ -2,6 +2,8 @@
 
 Fullstack blogging web app build with Nextjs, Prisma and PlanetScale DB.
 
+![Homepage screenshot](./screenshot.png)
+
 ## Features
 
 - [x] Full-features markdown editor for creating posts.
@@ -11,7 +13,8 @@ Fullstack blogging web app build with Nextjs, Prisma and PlanetScale DB.
 
 ### To be implemented
 
-- Allow default user to change credentials
+- [ ] Allow default user to change credentials
+- [ ] Delete posts
 
 ##
 

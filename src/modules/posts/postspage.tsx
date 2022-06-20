@@ -10,6 +10,7 @@ import { NextPage } from 'next';
 import rehypeKatex from 'rehype-katex';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
+import Seo from '../../components/Seo';
 
 interface PostsPageProps {
   data: ApiResponse<
@@ -50,6 +51,8 @@ const PostsPage: NextPage<PostsPageProps> = ({ data: defaultData }) => {
 
   return (
     <DefaultLayout>
+      <Seo title={data.data.title} description={data.data.synopsis} />
+
       <div className="w-4/5 mx-auto my-16">
         <div>
           <h2 className="text-5xl text-spaceCadet font-black">{data.data.title}</h2>

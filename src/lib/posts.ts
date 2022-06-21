@@ -99,5 +99,21 @@ const updatePostById = async (id: number, post: PostProps) => {
   });
 };
 
-export { createPost, fetchPosts, fetchAllPosts, fetchPostBySlug, fetchPostById, updatePostById };
+const deletePostById = async (id: number) => {
+  return await prisma.posts.delete({
+    where: {
+      id
+    }
+  });
+};
+
+export {
+  createPost,
+  fetchPosts,
+  fetchAllPosts,
+  fetchPostBySlug,
+  fetchPostById,
+  updatePostById,
+  deletePostById
+};
 export type { PostProps };

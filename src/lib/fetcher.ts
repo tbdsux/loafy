@@ -1,12 +1,12 @@
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
-const requester = async <T extends Record<string, any>>(url: string, body: T) => {
+const requester = async <T extends Record<string, any>>(url: string, method: string, body?: T) => {
   return await fetch(url, {
-    method: 'POST',
+    method: method,
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(body)
+    body: body ? JSON.stringify(body) : undefined
   });
 };
 

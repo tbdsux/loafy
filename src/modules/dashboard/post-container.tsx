@@ -1,6 +1,7 @@
 import { Posts } from '@prisma/client';
 import { LinkButton } from '../../components/LinkButton';
 import { UserProps } from '../../lib/user';
+import DeletePostModal from './delete-post/modal';
 
 interface PostContainerProps {
   post: Posts;
@@ -11,13 +12,15 @@ const PostContainer = ({ post, user }: PostContainerProps) => {
   return (
     <li className="my-4 bg-neutral-200 relative rounded-lg p-8">
       {user != null && user.id == post.authorId ? (
-        <div className="absolute top-2 right-2">
+        <div className="absolute top-2 right-2 inline-flex items-center">
           <LinkButton
             href={`/dashboard/posts/edit/${post.id}`}
-            className="bg-mediumOrchid opacity-80 hover:opacity-100 duration-300 text-white py-1 px-3 rounded-lg text-xs"
+            className="bg-mediumOrchid opacity-80 hover:opacity-100 duration-300 text-white py-1 px-3 rounded-lg text-xs mx-1"
           >
             edit
           </LinkButton>
+
+          <DeletePostModal postid={post.id} />
         </div>
       ) : (
         <></>

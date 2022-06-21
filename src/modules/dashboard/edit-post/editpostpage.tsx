@@ -64,7 +64,7 @@ const EditPostPage = () => {
         handler={{
           text: 'edit post',
           function: async (post: PostProps) => {
-            const r = await requester(`/api/dashboard/posts/edit/${id}`, post);
+            const r = await requester(`/api/dashboard/posts/edit/${id}`, 'POST', post);
 
             const data: ApiResponse = await r.json();
 

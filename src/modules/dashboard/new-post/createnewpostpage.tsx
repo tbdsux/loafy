@@ -18,7 +18,7 @@ const CreateNewPostPage = () => {
         handler={{
           text: 'create post',
           function: async (post: PostProps) => {
-            const r = await requester('/api/dashboard/new-post', post);
+            const r = await requester('/api/dashboard/new-post', 'POST', post);
 
             const data: ApiResponse = await r.json();
 

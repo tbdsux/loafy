@@ -20,17 +20,17 @@ const ShowAllPosts = ({ defaultPosts, page }: ShowAllPostsProps) => {
     return <p>loading...</p>;
   }
 
-  if (data.data?.length === 0) {
-    return <p>No current posts...</p>;
-  }
-
   return (
     <div>
-      <ul>
-        {data.data?.map((p) => (
-          <PostContainer key={p.id} post={p} />
-        ))}
-      </ul>
+      {(data.data?.length ?? 0) > 0 ? (
+        <ul>
+          {data.data?.map((p) => (
+            <PostContainer key={p.id} post={p} />
+          ))}
+        </ul>
+      ) : (
+        <p>no posts ...</p>
+      )}
 
       <div className=" mt-8 flex items-center justify-between">
         <div>

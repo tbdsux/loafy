@@ -24,10 +24,17 @@ const Header = () => {
 
         {user != null ? (
           <ul className="inline-flex items-center text-sm">
-            <li className="mx-12">
+            <li className="">
               <Link href="/dashboard">
                 <a className="bg-iris opacity-80 hover:opacity-100 duration-300 text-white py-2 px-6 rounded-lg">
                   dashboard
+                </a>
+              </Link>
+            </li>
+            <li className="ml-6 mr-12">
+              <Link href="/dashboard/admin">
+                <a className="bg-spaceCadet opacity-80 hover:opacity-100 duration-300 text-white py-2 px-6 rounded-lg">
+                  admin
                 </a>
               </Link>
             </li>

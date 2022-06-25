@@ -10,11 +10,18 @@ Fullstack blogging web app build with Nextjs, Prisma and PlanetScale DB.
 - [x] Show all posts and view each.
 - [x] Single-user blogging platform.
 - [x] Paginated posts.
+- [x] Allow default user to change credentials.
+- [x] Manage posts (edit and remove).
 
-### To be implemented
+## Setting up
 
-- [ ] Allow default user to change credentials
-- [ ] Delete posts
+- Environment variables
+
+```
+DATABASE_URL='prisma-db-url'
+API_URL='project-web-api'
+SECRET_TOKEN='custom-random-token'
+```
 
 ##
 

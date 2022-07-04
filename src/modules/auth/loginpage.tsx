@@ -3,6 +3,7 @@ import { FormEvent, useRef } from 'react';
 import { toast } from 'react-toastify';
 import Seo from '../../components/Seo';
 import DefaultLayout from '../../layouts/Default';
+import { requester } from '../../lib/fetcher';
 import { useUser } from '../../lib/hooks/useUser';
 import { ApiResponse } from '../../typings/api';
 
@@ -32,41 +33,25 @@ const LoginPage = () => {
     loginBtn.current.innerText = 'logging in...';
     loginBtn.current.disabled = true;
 
-    try {
-      const res = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
-      });
+    const r = await requester('/api/login', 'POST', body);
 
-      const data = (await res.json()) as ApiResponse;
+    const data: ApiResponse = await r.json();
 
-      if (!data.success) {
-        // failed to login in here
-        toast.error('Error: ' + data.message);
-
-        return;
-      }
-
-      toast.success('Succesfully logged in.');
-
-      setTimeout(() => {
-        router.push('/dashboard');
-      }, 2000);
-    } catch (err) {
+    if (!r.ok) {
       loginBtn.current.innerText = 'login';
       loginBtn.current.disabled = false;
 
-      console.log(err);
+      // failed to login in here
+      toast.error(data.message);
 
-      toast.error(String(err));
-
-      // handle error in here
+      return;
     }
 
-    
+    toast.success('Succesfully logged in.');
+
+    setTimeout(() => {
+      router.push('/dashboard');
+    }, 2000);
   };
 
   return (
